@@ -2,7 +2,7 @@
 const nextConfig = {
   experimental: {
     appDir: true,
-    serverComponentsExternalPackages: ["mongoose"],
+    serverComponentsExternalPackages: ["postgress"],
   },
   images: {
     domains: ["lh3.googleusercontent.com"],

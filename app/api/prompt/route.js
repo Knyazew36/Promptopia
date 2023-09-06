@@ -1,5 +1,5 @@
-import prisma from "@utils/database";
-
+import { PrismaClient } from "@prisma/client";
+const prisma = PrismaClient();
 export const GET = async (request) => {
   try {
     await prisma.$connect();
@@ -15,3 +15,5 @@ export const GET = async (request) => {
     prisma.$disconnect();
   }
 };
+
+//TODO: https://www.google.com/search?q=next+prisma&oq=next+prisma&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQIxgnMgkIAhAjGCcYigUyCQgDEAAYQxiKBTIJCAQQABhDGIoFMgkIBRAAGEMYigUyCQgGEAAYQxiKBTIGCAcQRRg80gEIMzczOWowajeoAgCwAgA&sourceid=chrome&ie=UTF-8#fpstate=ive&vld=cid:87ee6f7c,vid:8DiT-LdYXC0
