@@ -16,7 +16,25 @@ const PromptCardList = ({ data, handleTagClick }) => {
 export default function Feed() {
   const [searchText, setSearchText] = useState("");
   const [posts, setPosts] = useState([]);
-  const handleSearchChange = (e) => {};
+
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearchText(value);
+  };
+
+  const handleTagClick = (e) => {
+    const value = e;
+    setSearchText(value);
+  };
+
+  const filteredPosts = posts.filter((post) => {
+    const username = post.creator.username.toLowerCase();
+    const tag = post.tag.toLowerCase();
+    return (
+      username.includes(searchText.toLowerCase()) ||
+      tag.includes(searchText.toLowerCase())
+    );
+  });
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -39,7 +57,7 @@ export default function Feed() {
           className="search_input peer"
         />
       </form>
-      <PromptCardList data={posts} handleTagClick={() => {}} />
+      <PromptCardList data={filteredPosts} handleTagClick={handleTagClick} />
     </section>
   );
 }

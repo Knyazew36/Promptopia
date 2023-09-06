@@ -1,6 +1,7 @@
 import prisma from "@utils/database";
 
 export const POST = async (req, res) => {
+  console.log("new");
   const { userId, prompt, tag } = await req.json();
   try {
     prisma.$connect();

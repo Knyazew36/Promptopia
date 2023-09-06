@@ -3,10 +3,13 @@
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
+  const { data: session } = useSession();
   const [copied, setCopied] = useState("");
   const pathname = usePathname();
+  const router = useRouter();
+
   const handleCopy = () => {
     setCopied(post.prompt);
     navigator.clipboard.writeText(post.prompt);
@@ -15,6 +18,7 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
 
   return (
     <div className="prompt_card">
+      //TODO: Доработать по профилю человека
       <div className="flex justify-between items-start gap-5">
         <div className="flex-1 flex justify-start items-center gap-3 cursor-pointer">
           <Image
@@ -54,9 +58,18 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
         #{post.tag}
       </p>
       {session?.user.id === post.creator.id && pathname === "/profile" && (
-        <div>
-          <p className="font-inter text-sm green_gradient cursor-pointer">
+        <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
+          <p
+            className="font-inter text-sm green_gradient cursor-pointer"
+            onClick={handleEdit}
+          >
             Edit
+          </p>
+          <p
+            className="font-inter text-sm orange_gradient cursor-pointer"
+            onClick={handleDelete}
+          >
+            Delete
           </p>
         </div>
       )}
@@ -65,4 +78,3 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
 };
 
 export default PromptCard;
-//TODO: https://www.youtube.com/watch?v=wm5gMKuwSYk 246
