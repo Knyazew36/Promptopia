@@ -1,4 +1,6 @@
-import prisma from "prisma/prisma";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 export const GET = async (request, { params }) => {
   try {
