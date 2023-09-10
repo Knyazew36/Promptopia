@@ -1,5 +1,5 @@
-import { PrismaClient } from "@prisma/client";
-const prisma = PrismaClient();
+import prisma from "prisma/prisma";
+
 export const GET = async (request) => {
   try {
     await prisma.$connect();
